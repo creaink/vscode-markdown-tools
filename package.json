@@ -3,6 +3,11 @@
 	"displayName": "markdown-tools",
 	"description": "markdown tools",
 	"version": "0.0.1",
+	"publisher": "creaink",
+	"repository": "https://github.com/creaink/vscode-markdown-tools",
+	"bugs": {
+		"url": "https://github.com/creaink/vscode-markdown-tools/issues"
+	},
 	"engines": {
 		"vscode": "^1.38.0"
 	},
@@ -10,16 +15,26 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.helloWorld"
+		"onLanguage:markdown",
+		"onCommand:markdown-tools."
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "extension.helloWorld",
-				"title": "Hello World"
+				"command": "markdown-tools.copyReferLink",
+				"title": "Copy Current Title Refer Link"
 			}
-		]
+		],
+		"menus": {
+			"editor/context": [
+				{
+					"when": "resourceLangId == markdown",
+					"command": "markdown-tools.copyReferLink",
+					"group": "markdown-tools"
+				}
+			]
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
