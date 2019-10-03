@@ -2,7 +2,7 @@
 	"name": "markdown-tools",
 	"displayName": "markdown-tools",
 	"description": "markdown tools",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"publisher": "creaink",
 	"repository": "https://github.com/creaink/vscode-markdown-tools",
 	"bugs": {
@@ -23,13 +23,18 @@
 		"commands": [
 			{
 				"command": "markdown-tools.copyReferLink",
-				"title": "Copy Current Title Refer Link"
+				"title": "Copy Current File ReferLink"
 			}
 		],
 		"menus": {
 			"editor/context": [
 				{
-					"when": "resourceLangId == markdown",
+					"command": "markdown-tools.copyReferLink",
+					"group": "markdown-tools"
+				}
+			],
+			"explorer/context": [
+				{
 					"command": "markdown-tools.copyReferLink",
 					"group": "markdown-tools"
 				}
