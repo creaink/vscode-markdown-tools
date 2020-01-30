@@ -7,7 +7,7 @@ Useful tools of VSCode plugin for markdown.
 - Copy as markdown refer link
   - copy markdown current line title or file as refer link
   - copy file refer link from file browser
-- [ ] Convert `[link][url]` to `[link][link-id]` with `[link-id]: url`
+- [ ] Convert `[link-id][url]` to `[link-id][]` with `[link-id]: url` in clipboard
 
 ## Requirements
 

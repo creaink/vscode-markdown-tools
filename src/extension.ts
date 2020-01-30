@@ -30,8 +30,11 @@ export function activate(context: vscode.ExtensionContext) {
 	}
 
 
-	function getReferLinkFromRelWorkspacePath(relWorkspacePath:string) {
-		// 从路径当中获取文件名
+	/**
+	 * 从路径当中获取文件名
+	 * @param relWorkspacePath 相对于 Workspace 的文件路径
+	 */
+	function getReferLinkFromRelWorkspacePath(relWorkspacePath: string) {
 		let fileName = relWorkspacePath.replace(/^.*[\\\/]/, '');
 		return `[${fileName}](/${relWorkspacePath})`
 	}
@@ -52,13 +55,13 @@ export function activate(context: vscode.ExtensionContext) {
 			const curLinePosition = activeEditor.selection.active;
 
 			let curLineSelection = new vscode.Selection(curLinePosition.with(curLinePosition.line, 0),
-														curLinePosition.with(curLinePosition.line+1, 0));
-			let curLineText = activeEditor.document.getText(curLineSelection).replace(/[\n\r]/g,'');
+				curLinePosition.with(curLinePosition.line + 1, 0));
+			let curLineText = activeEditor.document.getText(curLineSelection).replace(/[\n\r]/g, '');
 			if (curLineText.startsWith("#")) {
 				// markdown 标题的链接
 				let herfName = curLineText.replace(/^#+\s/, '');
 				// delete dummy '#', replace no-first ' ' with '-'
-				let herfLinkShort = curLineText.replace(/(#+)(\1)\s/, '$2').replace(/\s/g, '-');
+				let herfLinkShort = curLineText.replace(/(#)\1+\s/, '$1').replace(/\s/g, '-');
 				let herfLinkLong = '/' + relWorkspacePath + herfLinkShort;
 				let herf = `[${herfName}](${herfLinkLong})`;
 				return herf;
@@ -70,7 +73,11 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	}
 
-    function copyReferLink(uri?: vscode.Uri) {
+	/**
+	 * copyReferLink command handler
+	 * @param uri context uri
+	 */
+	function copyReferLink(uri?: vscode.Uri) {
 		var referLink = null;
 		if (uri instanceof vscode.Uri) {
 			if (uriIsActiveEditor(uri)) {
@@ -96,9 +103,9 @@ export function activate(context: vscode.ExtensionContext) {
 
 	// 注册 command
 	context.subscriptions.push(
-        vscode.commands.registerCommand("markdown-tools.copyReferLink", copyReferLink),
+		vscode.commands.registerCommand("markdown-tools.copyReferLink", copyReferLink),
 	);
 }
 
 // this method is called when your extension is deactivated
-export function deactivate() {}
+export function deactivate() { }
